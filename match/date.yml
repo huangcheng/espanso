@@ -1,0 +1,53 @@
+matches:
+  - trigger: ":time"
+    replace: "{{time}}"
+    vars:
+      - name: time
+        type: date
+        params:
+          format: "%H:%M:%S"
+
+  - trigger: ":now"
+    replace: "{{date}} {{time}}"
+    vars:
+      - name: date
+        type: date
+        params:
+          format: "%Y-%m-%d"
+      - name: time
+        type: date
+        params:
+          format: "%H:%M:%S"
+
+  - trigger: ":wn"
+    replace: "{{week}}"
+    vars:
+      - name: week
+        type: script
+        params:
+          args:
+            - python3
+            - "%CONFIG%/scripts/date.py"
+            - "get_week_number"
+
+  - trigger: ":week"
+    replace: "{{week}}"
+    vars:
+      - name: week
+        type: script
+        params:
+          args:
+            - python3
+            - "%CONFIG%/scripts/date.py"
+            - "get_week"
+
+  - trigger: ":work:"
+    replace: "{{week}}"
+    vars:
+      - name: week
+        type: script
+        params:
+          args:
+            - python3
+            - "%CONFIG%/scripts/date.py"
+            - "get_work_day"
