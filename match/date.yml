@@ -41,7 +41,7 @@ matches:
             - "%CONFIG%/scripts/date.py"
             - "get_week"
 
-  - trigger: ":work:"
+  - trigger: ":work"
     replace: "{{week}}"
     vars:
       - name: week
@@ -51,3 +51,14 @@ matches:
             - python3
             - "%CONFIG%/scripts/date.py"
             - "get_work_day"
+
+  - regex: "=diff\\((?P<date1>.*?),(?P<date2>.*?)\\)"
+    replace: "{{result}}"
+    vars:
+      - name: result
+        type: script
+        params:
+          args:
+            - python3
+            - "%CONFIG%/scripts/date.py"
+            - "diff"
